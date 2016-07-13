@@ -120,8 +120,8 @@ Logger <- setRefClass("Logger",
                         },
 
                         addHandler = function(handler, ..., level=NULL, formatter=defaultFormat) {
-                          if (is.null(level))
-                            level <- getLevel()
+                          log_level <- ifelse(is.null(level), getLevel(), level)
+                          
                           handlerEnv <- new.env()
                           if(is.character(handler)){
                             ## first parameter is handler name
@@ -136,7 +136,7 @@ Logger <- setRefClass("Logger",
                             handlerName <- deparse(substitute(handler))
                           }
                           updateOptions.environment(handlerEnv, ...)
-                          assign('level', namedLevel(level), handlerEnv)
+                          assign('level', namedLevel(log_level), handlerEnv)
                           assign('formatter', formatter, handlerEnv)
                           removeHandler(handlerName)
                           if(with(handlerEnv, action)(NA, handlerEnv, dry=TRUE) == TRUE) {
