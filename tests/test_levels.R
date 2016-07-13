@@ -1,3 +1,5 @@
+#install.packages("~/Projects/logging", repos = NULL, type="source")
+
 library(logging)
 
 LOG_FILE <- "/tmp/foo.log"
