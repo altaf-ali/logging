@@ -119,7 +119,9 @@ Logger <- setRefClass("Logger",
                           handlers <<- handlers[!(names(handlers) == handler)]
                         },
 
-                        addHandler = function(handler, ..., level=20, formatter=defaultFormat) {
+                        addHandler = function(handler, ..., level=NULL, formatter=defaultFormat) {
+                          if (is.null(level))
+                            level <- getLevel()
                           handlerEnv <- new.env()
                           if(is.character(handler)){
                             ## first parameter is handler name
@@ -148,4 +150,5 @@ Logger <- setRefClass("Logger",
                         debug = function(...) { log(loglevels["DEBUG"], ...) },
                         info = function(...) { log(loglevels["INFO"], ...) },
                         warn = function(...) { log(loglevels["WARN"], ...) },
+                        warning = function(...) { warn(...) },
                         error = function(...) { log(loglevels["ERROR"], ...) }))

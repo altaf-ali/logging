@@ -50,7 +50,8 @@ writeToFile <- function(msg, handler, ...)
 ## the single predefined formatter
 
 defaultFormat <- function(record) {
-  text <- paste(record$timestamp, paste(record$levelname, record$logger, record$msg, sep=':'))
+  #text <- paste(record$timestamp, paste(record$levelname, record$logger, record$msg, sep=':'))
+  paste(record$timestamp, sprintf("%8s%8s", record$logger, record$levelname), record$msg)
 }
 
 #################################################################################
