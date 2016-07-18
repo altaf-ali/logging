@@ -11,5 +11,7 @@ logger$addHandler(writeToFile, file = LOG_FILE)
 
 logger$info("Starting")
 logger$debug("Doing something useful")
+logger$debug('         Message with spaces')
 logger$warning("Terminating-----------")
+
 
